@@ -76,10 +76,10 @@ public class cd_shelf {
     }
   }
 
-  // the method to search for a cd by title
+  // the method to search for a cd 
   public int search(String t) {
     for (int i = 0; i < numcds; i++) {
-      if (cds[i].getTitle().equals(t)) {
+      if (cds[i].getTitle().equals(t) || cds[i].getArtist().equals(t)) {
         return i;
       }
     }
