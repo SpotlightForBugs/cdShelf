@@ -109,6 +109,7 @@ public class cd_shelf {
             cd c = new cd(t, a, tr, p, y);
             add(c);
         } catch (Exception e) {
+            System.err.println(e);
 
         }
     }
@@ -567,7 +568,8 @@ public class cd_shelf {
         try {
             br = new BufferedReader(new FileReader("users.txt"));
         } catch (FileNotFoundException ex) {
-            ;
+            System.err.println(ex);
+            
         }
         try {
             //read the file line by line
@@ -582,7 +584,7 @@ public class cd_shelf {
                 line = br.readLine();
             }
         } catch (IOException ex) {
-            ;
+            System.err.println(ex);
         }
         return false;
     }
@@ -621,7 +623,8 @@ public class cd_shelf {
         try {
             br = new BufferedReader(new FileReader("users.txt"));
         } catch (FileNotFoundException ex) {
-            ;
+            System.err.println(ex);
+
         }
         try {
             //read the file line by line
@@ -636,7 +639,7 @@ public class cd_shelf {
                 line = br.readLine();
             }
         } catch (IOException ex) {
-            ;
+            System.err.println(ex);
         }
         //if the username is not found in the file
         //write the username and password to the file
@@ -647,7 +650,7 @@ public class cd_shelf {
             out.println(username + "," + password);
             out.close();
         } catch (IOException ex) {
-            ;
+            System.err.println(ex);
         }
         return true;
         
