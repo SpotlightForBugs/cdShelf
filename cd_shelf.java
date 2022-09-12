@@ -1,8 +1,12 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Scanner;
 
 
 // the cd shelf is a list of cds that can be added to and removed from.
@@ -30,7 +34,6 @@ public class cd_shelf {
         numcds--;
     }
 
-
     private void swap(int pIndex1, int pIndex2) {
 
         cd temp2 = cds[pIndex2];
@@ -39,17 +42,12 @@ public class cd_shelf {
 
     }
 
-
-
-
     // the method to print the shelf
     public void print() {
         for (int i = 0; i < numcds; i++) {
             cds[i].print();
         }
     }
-
-    
 
     public void addcd(String t, String a, int tr, double p, int y) {
 
@@ -60,10 +58,6 @@ public class cd_shelf {
 
         }
     }
-
-  
-   
-
 
     // the method to search for a cd
     public int search(String t) {
@@ -114,17 +108,16 @@ public class cd_shelf {
         BufferedWriter bw = new BufferedWriter(fw);
         for (int i = 0; i < numcds; i++) {
             bw.write(
-                cds[i].getTitle() +
-                "," +
-                cds[i].getArtist() +
-                "," +
-                cds[i].getTracks() +
-                "," +
-                cds[i].getPrice() + 
-                "," +
-                cds[i].getYear());
-                
-                            
+                    cds[i].getTitle() +
+                            "," +
+                            cds[i].getArtist() +
+                            "," +
+                            cds[i].getTracks() +
+                            "," +
+                            cds[i].getPrice() +
+                            "," +
+                            cds[i].getYear());
+
             bw.newLine();
         }
         bw.close();
@@ -139,7 +132,8 @@ public class cd_shelf {
 
         while (line != null) {
             String[] parts = line.split(",");
-            add(new cd(parts[0], parts[1], Integer.parseInt(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4])));
+            add(new cd(parts[0], parts[1], Integer.parseInt(parts[2]), Double.parseDouble(parts[3]),
+                    Integer.parseInt(parts[4])));
             line = br.readLine();
         }
         br.close();
@@ -186,13 +180,11 @@ public class cd_shelf {
         }
     }
 
-
-
     //functions to sort the cds by title using quicksort
     public void quickSortTitle(int low, int high) {
         int i = low, j = high;
         // Get the pivot element from the middle of the list
-        String pivot = cds[low + (high-low)/2].getTitle();
+        String pivot = cds[low + (high - low) / 2].getTitle();
 
         // Divide into two lists
         while (i <= j) {
@@ -261,7 +253,7 @@ public class cd_shelf {
         if (i < high)
             quickSortArtist(i, high);
     }
-    
+
     //functions to sort the cds by tracks using quicksort
     public void quickSortTracks(int low, int high) {
         int i = low, j = high;
@@ -299,7 +291,7 @@ public class cd_shelf {
             quickSortTracks(i, high);
     }
 
-    //functions to sort the cds by price using quicksort
+    //functions to sort the cds by price as double using quicksort 
     public void quickSortPrice(int low, int high) {
         int i = low, j = high;
         // Get the pivot element from the middle of the list
@@ -335,7 +327,7 @@ public class cd_shelf {
         if (i < high)
             quickSortPrice(i, high);
     }
-    
+
     //quick sort year
     public void quickSortYear(int low, int high) {
         int i = low, j = high;
@@ -372,9 +364,60 @@ public class cd_shelf {
         if (i < high)
             quickSortYear(i, high);
     }
-   
 
+    public boolean login(String username, String password) {
+        if (username != null && password != null) {
 
+            //searches for the username and password in the json file users.json and returns true if found using buffered reader
+            try {
+                BufferedReader br = new BufferedReader(new FileReader("users.txt"));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    if (line.contains(username) && line.contains(password) ) {
+                        //if there is no other character in the line apart from the username and password spaces, tabs and new lines then return true
+                        if (line.length() == (username.length() + password.length() + 2)) {
+                            return true;
+                        }
+                    }
+                }
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        return false;
+    }
 
+    public boolean register(String username, String password) {
 
+        //if the username is not found in the json file users.json then it is added to the file using buffered writer
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.contains(username)) {
+                    return false;
+                }
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("users.json", true));
+            bw.write(username + " " + password);
+            bw.newLine();
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
 }
+
+
+
+
+
