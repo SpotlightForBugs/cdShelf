@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.io.IOException;
 import javax.swing.*;
@@ -19,7 +18,7 @@ public class cd_shelf_gui {
     cd_shelf shelf = new cd_shelf(100);
     // create a new JFrame
     JFrame frame = new JFrame("CD Shelf");
-    
+
     //  set the size of the frame
     // try {
     //   UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -38,31 +37,31 @@ public class cd_shelf_gui {
     Color color = new Color(255, 239, 213);
     frame.getContentPane().setBackground(color);
 
-    //JToggleBUtton to toggle dark mode
+    // JToggleBUtton to toggle dark mode
     JToggleButton darkMode = new JToggleButton("Dark Mode");
     panel.add(darkMode);
-    
 
-    //set the default state of the toggle button to be not selected
+    // set the default state of the toggle button to be not selected
     darkMode.setSelected(false);
 
-    //Change the panel background color when the toggle button is selected
-    darkMode.addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        AbstractButton abstractButton = (AbstractButton) e.getSource();
-        ButtonModel buttonModel = abstractButton.getModel();
-        
-        boolean selected = buttonModel.isSelected();
-        if (selected) {
-          panel.setBackground(Color.BLACK);
-          label.setForeground(Color.WHITE);
-        } else {
-          panel.setBackground(Color.WHITE);
-          label.setForeground(Color.BLACK);
-        }
-      }
-    });
+    // Change the panel background color when the toggle button is selected
+    darkMode.addChangeListener(
+        new ChangeListener() {
+          @Override
+          public void stateChanged(ChangeEvent e) {
+            AbstractButton abstractButton = (AbstractButton) e.getSource();
+            ButtonModel buttonModel = abstractButton.getModel();
+
+            boolean selected = buttonModel.isSelected();
+            if (selected) {
+              panel.setBackground(Color.BLACK);
+              label.setForeground(Color.WHITE);
+            } else {
+              panel.setBackground(Color.WHITE);
+              label.setForeground(Color.BLACK);
+            }
+          }
+        });
 
     // create a new JTable
     JTable table = new JTable(100, 4);
@@ -135,7 +134,6 @@ public class cd_shelf_gui {
     JButton sortYear = new JButton("Sort Year");
     panel.add(sortYear);
 
-
     // add the panel to the frame
     frame.add(panel);
 
@@ -197,7 +195,6 @@ public class cd_shelf_gui {
     //              }
     //            });
 
-   
     add.addActionListener(
         new java.awt.event.ActionListener() {
 
@@ -210,7 +207,9 @@ public class cd_shelf_gui {
                     JOptionPane.showInputDialog("Enter the number of tracks on the cd"));
             double price =
                 Double.parseDouble(JOptionPane.showInputDialog("Enter the price of the cd"));
-                int year = Integer.parseInt(JOptionPane.showInputDialog("Enter the year of publication of the cd"));
+            int year =
+                Integer.parseInt(
+                    JOptionPane.showInputDialog("Enter the year of publication of the cd"));
 
             cd c = new cd(title, artist, tracks, price, year);
             // add the cd to the shelf
@@ -242,7 +241,6 @@ public class cd_shelf_gui {
           }
         });
 
-   
     // button.actionPerformed
     search.addActionListener(
         new java.awt.event.ActionListener() {
@@ -273,7 +271,6 @@ public class cd_shelf_gui {
           }
         });
 
-    
     // button.actionPerformed
     load.addActionListener(
         new java.awt.event.ActionListener() {
@@ -333,10 +330,7 @@ public class cd_shelf_gui {
           }
         });
 
-    
-
-
-    //map the buttons to quicksort to the functions
+    // map the buttons to quicksort to the functions
     sortArtist.addActionListener(
         new java.awt.event.ActionListener() {
           public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -351,8 +345,8 @@ public class cd_shelf_gui {
             }
           }
         });
-        // map the buttons to quicksort to the functions
-   sortTitle.addActionListener(
+    // map the buttons to quicksort to the functions
+    sortTitle.addActionListener(
         new java.awt.event.ActionListener() {
           public void actionPerformed(java.awt.event.ActionEvent evt) {
             // sort the shelf by title
@@ -366,7 +360,7 @@ public class cd_shelf_gui {
             }
           }
         });
-        // map the buttons to quicksort to the functions
+    // map the buttons to quicksort to the functions
     sortPrice.addActionListener(
         new java.awt.event.ActionListener() {
           public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,7 +375,7 @@ public class cd_shelf_gui {
             }
           }
         });
-        // map the buttons to quicksort to the functions
+    // map the buttons to quicksort to the functions
     sortTracks.addActionListener(
         new java.awt.event.ActionListener() {
           public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,7 +390,7 @@ public class cd_shelf_gui {
             }
           }
         });
-        // map the buttons to quicksort to the functions
+    // map the buttons to quicksort to the functions
     sortYear.addActionListener(
         new java.awt.event.ActionListener() {
           public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -410,12 +404,6 @@ public class cd_shelf_gui {
               table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
             }
           }
-        });    
-
-
-
-
-
-
+        });
   }
 }
