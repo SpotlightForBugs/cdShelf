@@ -1,9 +1,11 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
@@ -366,54 +368,91 @@ public class cd_shelf {
     }
 
     public boolean login(String username, String password) {
-        if (username != null && password != null) {
-
-            //searches for the username and password in the json file users.json and returns true if found using buffered reader
-            try {
-                BufferedReader br = new BufferedReader(new FileReader("users.txt"));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    if (line.contains(username) && line.contains(password) ) {
-                        //if there is no other character in the line apart from the username and password spaces, tabs and new lines then return true
-                        if (line.length() == (username.length() + password.length() + 2)) {
-                            return true;
-                        }
-                    }
+        //use buffered reader to read the file
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("users.txt"));
+        } catch (FileNotFoundException ex) {
+            ;
+        }
+        try {
+            //read the file line by line
+            String line = br.readLine();
+            while (line != null) {
+                //split the line to get the username and password
+                String[] lineSplit = line.split(",");
+                //check if the username and password are correct
+                if (lineSplit[0].equals(username) && lineSplit[1].equals(password)) {
+                    return true;
                 }
-                br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+                line = br.readLine();
             }
-            return false;
+        } catch (IOException ex) {
+            ;
         }
         return false;
     }
+        //for each line in users.txt
+        //if username + " " + password is found return true
+        //skip next line
+        //if at end of file return false
+
+
+
+
+
+
+
+    
 
     public boolean register(String username, String password) {
 
-        //if the username is not found in the json file users.json then it is added to the file using buffered writer
+        //write username,password to users.txt
+        //return true if successful
+        //return false if username already exists
+        //use buffered reader to read the file
+        BufferedReader br = null;
         try {
-            BufferedReader br = new BufferedReader(new FileReader("users.txt"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains(username)) {
+            br = new BufferedReader(new FileReader("users.txt"));
+        } catch (FileNotFoundException ex) {
+            ;
+        }
+        try {
+            //read the file line by line
+            String line = br.readLine();
+            while (line != null) {
+                //split the line to get the username and password
+                String[] lineSplit = line.split(",");
+                //check if the username and password are correct
+                if (lineSplit[0].equals(username)) {
                     return false;
                 }
+                line = br.readLine();
             }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ;
         }
+        //if the username is not found in the file
+        //write the username and password to the file
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("users.json", true));
-            bw.write(username + " " + password);
-            bw.newLine();
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            FileWriter fw = new FileWriter("users.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw);
+            out.println(username + "," + password);
+            out.close();
+        } catch (IOException ex) {
+            ;
         }
-
         return true;
+        
+
+
+
+
+
+
+
+
     }
 }
 

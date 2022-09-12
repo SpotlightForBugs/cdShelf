@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JToggleButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 import javax.swing.JPasswordField;
 
 public class cd_shelf_gui {
@@ -85,6 +88,11 @@ public class cd_shelf_gui {
     // add the add button to the panel
     panel.add(add);
     // create a new JButton
+    JButton addFromTable = new JButton("Add from table");
+    // add the addFromTable button to the panel
+    panel.add(addFromTable);
+    // create a new JButton
+
     JButton load = new JButton("Load from file");
     // add the load button to the panel
     panel.add(load);
@@ -207,6 +215,44 @@ public class cd_shelf_gui {
             }
           }
         });
+
+
+
+    
+
+
+    //after an user has finished editing a column, it will update the shelf
+    table.getModel().addTableModelListener(new TableModelListener() {
+      @Override
+      public void tableChanged(TableModelEvent e) {
+        int row = e.getFirstRow();
+        int column = e.getColumn();
+        TableModel model = (TableModel) e.getSource();
+        String columnName = model.getColumnName(column);
+        Object data = model.getValueAt(row, column);
+        if (columnName.equals("Title")) {
+          shelf.getCds()[row].setTitle((String) data);
+        }
+        if (columnName.equals("Artist")) {
+          shelf.getCds()[row].setArtist((String) data);
+        }
+        if (columnName.equals("Tracks")) {
+          shelf.getCds()[row].setTracks((int) data);
+        }
+        if (columnName.equals("Price")) {
+          shelf.getCds()[row].setPrice((double) data);
+        }
+        if (columnName.equals("Year")) {
+          shelf.getCds()[row].setYear((int) data);
+        }
+      }
+    });
+
+
+
+
+
+
 
     add.addActionListener(
         new java.awt.event.ActionListener() {

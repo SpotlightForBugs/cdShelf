@@ -51,4 +51,8 @@ V0=cd_shelf#cd#Aggregation####0#0#0###0#0
 
 [Interactive]
 I0=
+I1=cd_shelf_gui cd_shelf_gui1 = new cd_shelf_gui();
+I2=cd_shelf_gui1.main(new String[] {""});
+I3=cd_shelf cd_shelf1 = new cd_shelf(100);
+I4=cd_shelf1.addCDfromOnline("hello world");
 
