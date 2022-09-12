@@ -3,7 +3,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
+
 
 // the cd shelf is a list of cds that can be added to and removed from.
 public class cd_shelf {
@@ -49,118 +49,20 @@ public class cd_shelf {
         }
     }
 
-    // the method to sort the cds by price
-    public void sort() {
-        for (int i = 0; i < numcds - 1; i++) {
-            int min = i;
-            for (int j = i + 1; j < numcds; j++) {
-                if (cds[j].getPrice() < cds[min].getPrice()) {
-                    min = j;
-                }
-            }
-            cd temp = cds[i];
-            cds[i] = cds[min];
-            cds[min] = temp;
-        }
-    }
+    
 
-    public void addcd(String t, String a, int tr, double p) {
+    public void addcd(String t, String a, int tr, double p, int y) {
 
         try {
-            cd c = new cd(t, a, tr, p);
+            cd c = new cd(t, a, tr, p, y);
             add(c);
         } catch (Exception e) {
 
         }
     }
 
-    // the method to sort the cds by artist lexicographically
-    public void sortArtist() {
-        for (int i = 0; i < numcds - 1; i++) {
-            int min = i;
-            for (int j = i + 1; j < numcds; j++) {
-                if (cds[j].getArtist().compareTo(cds[min].getArtist()) < 0) {
-                    min = j;
-                }
-            }
-            cd temp = cds[i];
-            cds[i] = cds[min];
-            cds[min] = temp;
-        }
-    }
-    //the method to sort the cds by name lexicographically
-    public void sortTitle() {
-        for (int i = 0; i < numcds - 1; i++) {
-            int min = i;
-            for (int j = i + 1; j < numcds; j++) {
-                if (cds[j].getTitle().compareTo(cds[min].getTitle()) < 0) {
-                    min = j;
-                }
-            }
-            cd temp = cds[i];
-            cds[i] = cds[min];
-            cds[min] = temp;
-        }
-    }
-
-    public void bubbleSortTitle() {
-
-        int len = cds.length;
-
-        while (len > 1) {
-            for (int i = 0; i <= len - 2; len--) {
-                if (cds[len].getTitle().compareTo(cds[len + 1].getTitle()) < 0) {
-                    swap(len, len + 1);
-                }
-            }
-        }
-    }
-
-    public void bubbleSortArtist() {
-
-        int len = cds.length;
-
-        while (len > 1) {
-            for (int i = 0; i <= len - 2; len--) {
-                if (cds[len].getArtist().compareTo(cds[len + 1].getArtist()) < 0) {
-                    swap(len, len + 1);
-                }
-            }
-        }
-
-    }
-
-
-    public void bubbleSortTracks() {
-
-        int len = cds.length;
-
-        while (len > 1) {
-            for (int i = 0; i <= len - 2; len--) {
-                if (cds[len].getTracks() > cds[len + 1].getTracks()) {
-                    swap(len, len + 1);
-                }
-            }
-        }
-
-
-    }
-
-
-    public void bubbleSortPrice() {
-
-        int len = cds.length;
-
-        while (len > 1) {
-            for (int i = 0; i <= len - 2; len--) {
-                if (cds[len].getPrice() > cds[len + 1].getPrice()) {
-                    swap(len, len + 1);
-                }
-            }
-        }
-
-
-    }
+  
+   
 
 
     // the method to search for a cd
@@ -218,7 +120,11 @@ public class cd_shelf {
                 "," +
                 cds[i].getTracks() +
                 "," +
-                cds[i].getPrice());
+                cds[i].getPrice() + 
+                "," +
+                cds[i].getYear());
+                
+                            
             bw.newLine();
         }
         bw.close();
@@ -233,7 +139,7 @@ public class cd_shelf {
 
         while (line != null) {
             String[] parts = line.split(",");
-            add(new cd(parts[0], parts[1], Integer.parseInt(parts[2]), Double.parseDouble(parts[3])));
+            add(new cd(parts[0], parts[1], Integer.parseInt(parts[2]), Double.parseDouble(parts[3]), Integer.parseInt(parts[4])));
             line = br.readLine();
         }
         br.close();
@@ -265,13 +171,13 @@ public class cd_shelf {
             BufferedWriter bw = new BufferedWriter(fw);
             for (int i = 0; i < numcds; i++) {
                 bw.write(
-                    cds[i].getTitle() +
-                    "," +
-                    cds[i].getArtist() +
-                    "," +
-                    cds[i].getTracks() +
-                    "," +
-                    cds[i].getPrice());
+                        cds[i].getTitle() +
+                                "," +
+                                cds[i].getArtist() +
+                                "," +
+                                cds[i].getTracks() +
+                                "," +
+                                cds[i].getPrice());
                 bw.newLine();
             }
             bw.close();
@@ -279,4 +185,196 @@ public class cd_shelf {
             e.printStackTrace();
         }
     }
+
+
+
+    //functions to sort the cds by title using quicksort
+    public void quickSortTitle(int low, int high) {
+        int i = low, j = high;
+        // Get the pivot element from the middle of the list
+        String pivot = cds[low + (high-low)/2].getTitle();
+
+        // Divide into two lists
+        while (i <= j) {
+            // If the current value from the left list is smaller then the pivot
+            // element then get the next element from the left list
+            while (cds[i].getTitle().compareTo(pivot) < 0) {
+                i++;
+            }
+            // If the current value from the right list is larger then the pivot
+            // element then get the next element from the right list
+            while (cds[j].getTitle().compareTo(pivot) > 0) {
+                j--;
+            }
+
+            // If we have found a value in the left list which is larger then
+            // the pivot element and if we have found a value in the right list
+            // which is smaller then the pivot element then we exchange the
+            // values.
+            // As we are done we can increase i and j
+            if (i <= j) {
+                swap(i, j);
+                i++;
+                j--;
+            }
+        }
+        // Recursion
+        if (low < j)
+            quickSortTitle(low, j);
+        if (i < high)
+            quickSortTitle(i, high);
+    }
+
+    //functions to sort the cds by artist using quicksort
+    public void quickSortArtist(int low, int high) {
+        int i = low, j = high;
+        // Get the pivot element from the middle of the list
+        String pivot = cds[low + (high - low) / 2].getArtist();
+
+        // Divide into two lists
+        while (i <= j) {
+            // If the current value from the left list is smaller then the pivot
+            // element then get the next element from the left list
+            while (cds[i].getArtist().compareTo(pivot) < 0) {
+                i++;
+            }
+            // If the current value from the right list is larger then the pivot
+            // element then get the next element from the right list
+            while (cds[j].getArtist().compareTo(pivot) > 0) {
+                j--;
+            }
+
+            // If we have found a value in the left list which is larger then
+            // the pivot element and if we have found a value in the right list
+            // which is smaller then the pivot element then we exchange the
+            // values.
+            // As we are done we can increase i and j
+            if (i <= j) {
+                swap(i, j);
+                i++;
+                j--;
+            }
+        }
+        // Recursion
+        if (low < j)
+            quickSortArtist(low, j);
+        if (i < high)
+            quickSortArtist(i, high);
+    }
+    
+    //functions to sort the cds by tracks using quicksort
+    public void quickSortTracks(int low, int high) {
+        int i = low, j = high;
+        // Get the pivot element from the middle of the list
+        int pivot = cds[low + (high - low) / 2].getTracks();
+
+        // Divide into two lists
+        while (i <= j) {
+            // If the current value from the left list is smaller then the pivot
+            // element then get the next element from the left list
+            while (cds[i].getTracks() < pivot) {
+                i++;
+            }
+            // If the current value from the right list is larger then the pivot
+            // element then get the next element from the right list
+            while (cds[j].getTracks() > pivot) {
+                j--;
+            }
+
+            // If we have found a value in the left list which is larger then
+            // the pivot element and if we have found a value in the right list
+            // which is smaller then the pivot element then we exchange the
+            // values.
+            // As we are done we can increase i and j
+            if (i <= j) {
+                swap(i, j);
+                i++;
+                j--;
+            }
+        }
+        // Recursion
+        if (low < j)
+            quickSortTracks(low, j);
+        if (i < high)
+            quickSortTracks(i, high);
+    }
+
+    //functions to sort the cds by price using quicksort
+    public void quickSortPrice(int low, int high) {
+        int i = low, j = high;
+        // Get the pivot element from the middle of the list
+        double pivot = cds[low + (high - low) / 2].getPrice();
+
+        // Divide into two lists
+        while (i <= j) {
+            // If the current value from the left list is smaller then the pivot
+            // element then get the next element from the left list
+            while (cds[i].getPrice() < pivot) {
+                i++;
+            }
+            // If the current value from the right list is larger then the pivot
+            // element then get the next element from the right list
+            while (cds[j].getPrice() > pivot) {
+                j--;
+            }
+
+            // If we have found a value in the left list which is larger then
+            // the pivot element and if we have found a value in the right list
+            // which is smaller then the pivot element then we exchange the
+            // values.
+            // As we are done we can increase i and j
+            if (i <= j) {
+                swap(i, j);
+                i++;
+                j--;
+            }
+        }
+        // Recursion
+        if (low < j)
+            quickSortPrice(low, j);
+        if (i < high)
+            quickSortPrice(i, high);
+    }
+    
+    //quick sort year
+    public void quickSortYear(int low, int high) {
+        int i = low, j = high;
+        // Get the pivot element from the middle of the list
+        int pivot = cds[low + (high - low) / 2].getYear();
+
+        // Divide into two lists
+        while (i <= j) {
+            // If the current value from the left list is smaller then the pivot
+            // element then get the next element from the left list
+            while (cds[i].getYear() < pivot) {
+                i++;
+            }
+            // If the current value from the right list is larger then the pivot
+            // element then get the next element from the right list
+            while (cds[j].getYear() > pivot) {
+                j--;
+            }
+
+            // If we have found a value in the left list which is larger then
+            // the pivot element and if we have found a value in the right list
+            // which is smaller then the pivot element then we exchange the
+            // values.
+            // As we are done we can increase i and j
+            if (i <= j) {
+                swap(i, j);
+                i++;
+                j--;
+            }
+        }
+        // Recursion
+        if (low < j)
+            quickSortYear(low, j);
+        if (i < high)
+            quickSortYear(i, high);
+    }
+   
+
+
+
+
 }

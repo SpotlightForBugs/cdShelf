@@ -8,14 +8,24 @@ public class cd {
   private int tracks;
   // the price of the cd
   private double price;
+  //the year the cd was released
+  private int pYear;
   // the constructor of the cd class
-  public cd(String t, String a, int tr, double p) {
+  public cd(String t, String a, int tr, double p, int e) {
     title = t;
     artist = a;
     tracks = tr;
     price = p;
+    pYear = e;
   }
 
+
+  public int getYear() {
+    return pYear;
+  }
+  public void setYear(int e) {
+    pYear = e;
+  }
   // the method to get the title
   public String getTitle() {
     return title;
@@ -52,6 +62,7 @@ public class cd {
   public void print() {
     System.out.println("The title is " + title);
     System.out.println("The artist is " + artist);
+    System.out.println("The year of publication is " + pYear);
     System.out.println("The number of tracks is " + tracks);
     System.out.println("The price is " + price);
     System.out.println("________________________________________");

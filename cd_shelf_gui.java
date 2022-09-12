@@ -52,8 +52,7 @@ public class cd_shelf_gui {
       public void stateChanged(ChangeEvent e) {
         AbstractButton abstractButton = (AbstractButton) e.getSource();
         ButtonModel buttonModel = abstractButton.getModel();
-        boolean armed = buttonModel.isArmed();
-        boolean pressed = buttonModel.isPressed();
+        
         boolean selected = buttonModel.isSelected();
         if (selected) {
           panel.setBackground(Color.BLACK);
@@ -130,6 +129,13 @@ public class cd_shelf_gui {
     JButton sortTitle = new JButton("Sort Name");
     panel.add(sortTitle);
 
+    JButton sortTracks = new JButton("Sort Tracks");
+    panel.add(sortTracks);
+
+    JButton sortYear = new JButton("Sort Year");
+    panel.add(sortYear);
+
+
     // add the panel to the frame
     frame.add(panel);
 
@@ -191,7 +197,7 @@ public class cd_shelf_gui {
     //              }
     //            });
 
-    // button.actionPerformed
+   
     add.addActionListener(
         new java.awt.event.ActionListener() {
 
@@ -204,8 +210,9 @@ public class cd_shelf_gui {
                     JOptionPane.showInputDialog("Enter the number of tracks on the cd"));
             double price =
                 Double.parseDouble(JOptionPane.showInputDialog("Enter the price of the cd"));
+                int year = Integer.parseInt(JOptionPane.showInputDialog("Enter the year of publication of the cd"));
 
-            cd c = new cd(title, artist, tracks, price);
+            cd c = new cd(title, artist, tracks, price, year);
             // add the cd to the shelf
             shelf.add(c);
             // update the table and write all the cds to the table
@@ -235,21 +242,7 @@ public class cd_shelf_gui {
           }
         });
 
-    sortTitle.addActionListener(
-        new java.awt.event.ActionListener() {
-          public void actionPerformed(java.awt.event.ActionEvent evt) {
-            // remove the cd from the shelf
-
-            shelf.sortTitle();
-            for (int i = 0; i < shelf.getNumcds(); i++) {
-              table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
-              table.setValueAt(shelf.getCds()[i].getArtist(), i, 1);
-              table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
-              table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
-            }
-          }
-        });
-
+   
     // button.actionPerformed
     search.addActionListener(
         new java.awt.event.ActionListener() {
@@ -280,38 +273,7 @@ public class cd_shelf_gui {
           }
         });
 
-    // button.actionPerformed
-    sort.addActionListener(
-        new java.awt.event.ActionListener() {
-          public void actionPerformed(java.awt.event.ActionEvent evt) {
-            // sort the shelf
-            shelf.sort();
-            // update the table
-            for (int i = 0; i < shelf.getNumcds(); i++) {
-              table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
-              table.setValueAt(shelf.getCds()[i].getArtist(), i, 1);
-              table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
-              table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
-            }
-          }
-        });
-
-    // button.actionPerformed
-    sortArtist.addActionListener(
-        new java.awt.event.ActionListener() {
-          public void actionPerformed(java.awt.event.ActionEvent evt) {
-            // sort the shelf by artist
-            shelf.sortArtist();
-            // update the table
-            for (int i = 0; i < shelf.getNumcds(); i++) {
-              table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
-              table.setValueAt(shelf.getCds()[i].getArtist(), i, 1);
-              table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
-              table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
-            }
-          }
-        });
-
+    
     // button.actionPerformed
     load.addActionListener(
         new java.awt.event.ActionListener() {
@@ -372,5 +334,88 @@ public class cd_shelf_gui {
         });
 
     
+
+
+    //map the buttons to quicksort to the functions
+    sortArtist.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            // sort the shelf by title
+            shelf.quickSortArtist(0, shelf.getNumcds() - 1);
+            // refresh the table
+            for (int i = 0; i < shelf.getNumcds(); i++) {
+              table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
+              table.setValueAt(shelf.getCds()[i].getArtist(), i, 1);
+              table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
+              table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
+            }
+          }
+        });
+        // map the buttons to quicksort to the functions
+   sortTitle.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            // sort the shelf by title
+            shelf.quickSortTitle(0, shelf.getNumcds() - 1);
+            // refresh the table
+            for (int i = 0; i < shelf.getNumcds(); i++) {
+              table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
+              table.setValueAt(shelf.getCds()[i].getArtist(), i, 1);
+              table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
+              table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
+            }
+          }
+        });
+        // map the buttons to quicksort to the functions
+    sortPrice.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            // sort the shelf by title
+            shelf.quickSortPrice(0, shelf.getNumcds() - 1);
+            // refresh the table
+            for (int i = 0; i < shelf.getNumcds(); i++) {
+              table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
+              table.setValueAt(shelf.getCds()[i].getArtist(), i, 1);
+              table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
+              table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
+            }
+          }
+        });
+        // map the buttons to quicksort to the functions
+    sortTracks.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            // sort the shelf by title
+            shelf.quickSortTracks(0, shelf.getNumcds() - 1);
+            // refresh the table
+            for (int i = 0; i < shelf.getNumcds(); i++) {
+              table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
+              table.setValueAt(shelf.getCds()[i].getArtist(), i, 1);
+              table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
+              table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
+            }
+          }
+        });
+        // map the buttons to quicksort to the functions
+    sortYear.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            // sort the shelf by title
+            shelf.quickSortYear(0, shelf.getNumcds() - 1);
+            // refresh the table
+            for (int i = 0; i < shelf.getNumcds(); i++) {
+              table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
+              table.setValueAt(shelf.getCds()[i].getArtist(), i, 1);
+              table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
+              table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
+            }
+          }
+        });    
+
+
+
+
+
+
   }
 }
