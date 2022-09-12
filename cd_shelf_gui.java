@@ -19,12 +19,13 @@ public class cd_shelf_gui {
     cd_shelf shelf = new cd_shelf(100);
     // create a new JFrame
     JFrame frame = new JFrame("CD Shelf");
-    // set the size of the frame
-    try {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } catch (Exception e) {
+    
+    //  set the size of the frame
+    // try {
+    //   UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    // } catch (Exception e) {
 
-    }
+    // }
 
     frame.setSize(500, 650);
     // create a new JPanel
@@ -34,32 +35,35 @@ public class cd_shelf_gui {
     // add the label to the panel
     panel.add(label);
 
-    // create a new JToggleButton
-    JToggleButton darkMode = new JToggleButton("DarkMode", true);
+    Color color = new Color(255, 239, 213);
+    frame.getContentPane().setBackground(color);
+
+    //JToggleBUtton to toggle dark mode
+    JToggleButton darkMode = new JToggleButton("Dark Mode");
     panel.add(darkMode);
+    
 
-    ChangeListener changeListener =
-        new ChangeListener() {
-          public void stateChanged(ChangeEvent changeEvent) {
-            AbstractButton abstractButton = (AbstractButton) changeEvent.getSource();
-            ButtonModel buttonModel = abstractButton.getModel();
-            boolean armed = buttonModel.isArmed();
-            boolean pressed = buttonModel.isPressed();
-            boolean selected = buttonModel.isSelected();
-            if (!armed && !pressed && !selected) {
-              System.out.println("Whitemode");
-              frame.getContentPane().setBackground(Color.WHITE);
-              frame.setBackground(Color.white);
+    //set the default state of the toggle button to be not selected
+    darkMode.setSelected(false);
 
-              // Color class with color red
-
-            } else {
-              System.out.println("Darkmode");
-              frame.getContentPane().setBackground(Color.BLACK);
-              frame.setBackground(Color.black);
-            }
-          }
-        };
+    //Change the panel background color when the toggle button is selected
+    darkMode.addChangeListener(new ChangeListener() {
+      @Override
+      public void stateChanged(ChangeEvent e) {
+        AbstractButton abstractButton = (AbstractButton) e.getSource();
+        ButtonModel buttonModel = abstractButton.getModel();
+        boolean armed = buttonModel.isArmed();
+        boolean pressed = buttonModel.isPressed();
+        boolean selected = buttonModel.isSelected();
+        if (selected) {
+          panel.setBackground(Color.BLACK);
+          label.setForeground(Color.WHITE);
+        } else {
+          panel.setBackground(Color.WHITE);
+          label.setForeground(Color.BLACK);
+        }
+      }
+    });
 
     // create a new JTable
     JTable table = new JTable(100, 4);
@@ -367,9 +371,6 @@ public class cd_shelf_gui {
           }
         });
 
-    darkMode.addChangeListener(changeListener);
-    frame.add(darkMode, BorderLayout.NORTH);
-
-    frame.setVisible(true);
+    
   }
 }
