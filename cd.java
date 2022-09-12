@@ -20,45 +20,149 @@ public class cd {
   }
 
 
+/**
+ * The getYear function returns the year of the date.
+ * 
+ *
+ *
+ * @return The year of the date
+ *
+ * 
+ */
   public int getYear() {
     return pYear;
   }
   public void setYear(int e) {
     pYear = e;
   }
-  // the method to get the title
+  
+  /**
+   * The getTitle function returns the title of a book.
+   * 
+   *
+   *
+   * @return The title of the book
+   *
+   * 
+   */// the method to get the title
   public String getTitle() {
     return title;
   }
-  // the method to get the artist
+  
+  /**
+   * The getArtist function returns the artist of a song.
+   * 
+   *
+   *
+   * @return The artist
+   *
+   * 
+   */// the method to get the artist
   public String getArtist() {
     return artist;
   }
-  // the method to get the tracks
+  
+  /**
+   * The getTracks function returns the number of tracks in the album.
+   * 
+   *
+   *
+   * @return The number of tracks in the cd
+   *
+   * 
+  
+  /**
+   * The getTracks function returns the number of tracks in the album.
+   * 
+   *
+   *
+   * @return The tracks variable
+   *
+   * 
+   */ /// the method to get the tracks
   public int getTracks() {
     return tracks;
   }
-  // the method to get the price
+  
+  /**
+   * The getPrice function returns the price of the product.
+   * 
+   *
+   *
+   * @return The price of the item
+   *
+   * 
+   */// the method to get the price
   public double getPrice() {
     return price;
   }
-  // the method to set the title
+  
+  /**
+   * The setTitle function sets the title of the book.
+   * 
+   *
+   * @param t Set the title of the book
+   *
+   * @return The string t
+   *
+   * 
+   */// the method to set the title
   public void setTitle(String t) {
     title = t;
   }
-  // the method to set the artist
+  
+  /**
+   * The setArtist function sets the artist of a song.
+   * 
+   *
+   * @param a Set the artist name
+   *
+   * @return The artist variable
+   *
+   * 
+   */// the method to set the artist
   public void setArtist(String a) {
     artist = a;
   }
-  // the method to set the tracks
+  
+  /**
+   * The setTracks function sets the number of tracks in a CD.
+   * 
+   *
+   * @param tr Set the number of tracks in the album
+   *
+   * @return The value of tracks
+   *
+   * 
+   */// the method to set the tracks
   public void setTracks(int tr) {
     tracks = tr;
   }
-  // the method to set the price
+  
+  /**
+   * The setPrice function sets the price of the product.
+   * 
+   *
+   * @param p Set the price of the product
+   *
+   * @return Nothing
+   *
+   * 
+   */// the method to set the price
   public void setPrice(double p) {
     price = p;
   }
-  // the method to print the cd info
+  
+  /**
+   * The print function prints out the title, artist, year of publication,
+   * number of tracks and price.
+   
+   *
+   *
+   * @return A string representation of the object
+   *
+   * 
+   */// the method to print the cd info
   public void print() {
     System.out.println("The title is " + title);
     System.out.println("The artist is " + artist);

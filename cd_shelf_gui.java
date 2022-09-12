@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.io.Console;
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.AbstractButton;
@@ -11,7 +10,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import javax.swing.JPasswordField;
 
 public class cd_shelf_gui {
   // the cd_shelf has a gui that allows the user to add, remove, search and print
