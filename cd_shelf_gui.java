@@ -1,8 +1,7 @@
-import java.io.IOException;
-import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
-
+import java.io.IOException;
+import javax.swing.*;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JFrame;
@@ -22,11 +21,11 @@ public class cd_shelf_gui {
     JFrame frame = new JFrame("CD Shelf");
     // set the size of the frame
     try {
-              UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } catch(Exception e) {
-      
-    } 
- 
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    } catch (Exception e) {
+
+    }
+
     frame.setSize(500, 650);
     // create a new JPanel
     JPanel panel = new JPanel();
@@ -34,36 +33,34 @@ public class cd_shelf_gui {
     JLabel label = new JLabel("CD Shelf");
     // add the label to the panel
     panel.add(label);
-    
-    //create a new JToggleButton
-            JToggleButton darkMode = new JToggleButton("DarkMode", true);
-            panel.add(darkMode);
-    
-    ChangeListener changeListener = new ChangeListener() {
-      public void stateChanged(ChangeEvent changeEvent) {
-        AbstractButton abstractButton = (AbstractButton) changeEvent.getSource();
-        ButtonModel buttonModel = abstractButton.getModel();
-        boolean armed = buttonModel.isArmed();
-        boolean pressed = buttonModel.isPressed();
-        boolean selected = buttonModel.isSelected();
-        if (!armed && !pressed && !selected) {
-           System.out.println("Whitemode");
-    frame.getContentPane().setBackground(Color.WHITE);
-    frame.setBackground(Color.white);
-    
 
-//Color class with color red
-          
-    } else {
-      System.out.println("Darkmode");
-    frame.getContentPane().setBackground(Color.BLACK);
-    frame.setBackground(Color.black);
-    
-    } 
-    
-      }
-    };
-    
+    // create a new JToggleButton
+    JToggleButton darkMode = new JToggleButton("DarkMode", true);
+    panel.add(darkMode);
+
+    ChangeListener changeListener =
+        new ChangeListener() {
+          public void stateChanged(ChangeEvent changeEvent) {
+            AbstractButton abstractButton = (AbstractButton) changeEvent.getSource();
+            ButtonModel buttonModel = abstractButton.getModel();
+            boolean armed = buttonModel.isArmed();
+            boolean pressed = buttonModel.isPressed();
+            boolean selected = buttonModel.isSelected();
+            if (!armed && !pressed && !selected) {
+              System.out.println("Whitemode");
+              frame.getContentPane().setBackground(Color.WHITE);
+              frame.setBackground(Color.white);
+
+              // Color class with color red
+
+            } else {
+              System.out.println("Darkmode");
+              frame.getContentPane().setBackground(Color.BLACK);
+              frame.setBackground(Color.black);
+            }
+          }
+        };
+
     // create a new JTable
     JTable table = new JTable(100, 4);
     // remame the columns of the table
@@ -91,7 +88,7 @@ public class cd_shelf_gui {
     JButton save = new JButton("Save to file");
     // add the save button to the panel
     panel.add(save);
-    
+
     // create a new JButton
     JButton remove = new JButton("Remove");
     // add the remove button to the panel
@@ -125,16 +122,12 @@ public class cd_shelf_gui {
     JButton sortArtist = new JButton("Sort Artist");
     // add the sortArtist button to the panel
     panel.add(sortArtist);
-    //create a new JButton
+    // create a new JButton
     JButton sortTitle = new JButton("Sort Name");
     panel.add(sortTitle);
-    
-    
-    
+
     // add the panel to the frame
     frame.add(panel);
-
-    
 
     frame.setResizable(true);
     // make the frame half the size of the screen
@@ -156,43 +149,43 @@ public class cd_shelf_gui {
           }
         });
 
-//    // if you fill a row in the table, it will add a cd to the shelf if it is not
-//    // already there
-//    table
-//        .getModel()
-//        .addTableModelListener(
-//            new javax.swing.event.TableModelListener() {
-//              @Override
-//              public void tableChanged(javax.swing.event.TableModelEvent evt) {
-//                if (!table.isEditing()) {
-//
-//                  int row = table.getSelectedRow();
-//                  int column = table.getSelectedColumn();
-//                  for (int i = 0; i < table.getRowCount(); i++) {
-//                    for (int j = 0; j < table.getColumnCount(); j++) {
-//
-//                      String value = table.getValueAt(i, j).toString();
-//                      if (value.trim().length() == 0) {
-//                        System.out.println("not filled");
-//                      }
-//                    }
-//
-//                    if (shelf.search(table.getValueAt(row, 0).toString()) == -1) {
-//                      shelf.add(
-//                          new cd(
-//                              table.getValueAt(row, 0).toString(),
-//                              table.getValueAt(row, 1).toString(),
-//                              Integer.parseInt(table.getValueAt(row, 2).toString()),
-//                              Double.parseDouble(table.getValueAt(row, 3).toString())));
-//                    }
-//                  }
-//
-//                } // end of if
-//                else {
-//
-//                } // end of if-else
-//              }
-//            });
+    //    // if you fill a row in the table, it will add a cd to the shelf if it is not
+    //    // already there
+    //    table
+    //        .getModel()
+    //        .addTableModelListener(
+    //            new javax.swing.event.TableModelListener() {
+    //              @Override
+    //              public void tableChanged(javax.swing.event.TableModelEvent evt) {
+    //                if (!table.isEditing()) {
+    //
+    //                  int row = table.getSelectedRow();
+    //                  int column = table.getSelectedColumn();
+    //                  for (int i = 0; i < table.getRowCount(); i++) {
+    //                    for (int j = 0; j < table.getColumnCount(); j++) {
+    //
+    //                      String value = table.getValueAt(i, j).toString();
+    //                      if (value.trim().length() == 0) {
+    //                        System.out.println("not filled");
+    //                      }
+    //                    }
+    //
+    //                    if (shelf.search(table.getValueAt(row, 0).toString()) == -1) {
+    //                      shelf.add(
+    //                          new cd(
+    //                              table.getValueAt(row, 0).toString(),
+    //                              table.getValueAt(row, 1).toString(),
+    //                              Integer.parseInt(table.getValueAt(row, 2).toString()),
+    //                              Double.parseDouble(table.getValueAt(row, 3).toString())));
+    //                    }
+    //                  }
+    //
+    //                } // end of if
+    //                else {
+    //
+    //                } // end of if-else
+    //              }
+    //            });
 
     // button.actionPerformed
     add.addActionListener(
@@ -237,12 +230,12 @@ public class cd_shelf_gui {
             table.setValueAt("", 0, 3);
           }
         });
-    
-    
-     sortTitle.addActionListener(new java.awt.event.ActionListener() {
+
+    sortTitle.addActionListener(
+        new java.awt.event.ActionListener() {
           public void actionPerformed(java.awt.event.ActionEvent evt) {
             // remove the cd from the shelf
-            
+
             shelf.sortTitle();
             for (int i = 0; i < shelf.getNumcds(); i++) {
               table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
@@ -250,13 +243,8 @@ public class cd_shelf_gui {
               table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
               table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
             }
-    
-    
           }
         });
-    
-    
-    
 
     // button.actionPerformed
     search.addActionListener(
@@ -378,13 +366,10 @@ public class cd_shelf_gui {
             }
           }
         });
-    
+
     darkMode.addChangeListener(changeListener);
     frame.add(darkMode, BorderLayout.NORTH);
-    
+
     frame.setVisible(true);
-    
-    
-    }
+  }
 }
-  
