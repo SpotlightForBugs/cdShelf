@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.io.IOException;
 import javax.swing.*;
@@ -19,7 +18,7 @@ public class cd_shelf_gui {
     cd_shelf shelf = new cd_shelf(100);
     // create a new JFrame
     JFrame frame = new JFrame("CD Shelf");
-    
+
     //  set the size of the frame
     // try {
     //   UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -38,32 +37,32 @@ public class cd_shelf_gui {
     Color color = new Color(255, 239, 213);
     frame.getContentPane().setBackground(color);
 
-    //JToggleBUtton to toggle dark mode
+    // JToggleBUtton to toggle dark mode
     JToggleButton darkMode = new JToggleButton("Dark Mode");
     panel.add(darkMode);
-    
 
-    //set the default state of the toggle button to be not selected
+    // set the default state of the toggle button to be not selected
     darkMode.setSelected(false);
 
-    //Change the panel background color when the toggle button is selected
-    darkMode.addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        AbstractButton abstractButton = (AbstractButton) e.getSource();
-        ButtonModel buttonModel = abstractButton.getModel();
-        boolean armed = buttonModel.isArmed();
-        boolean pressed = buttonModel.isPressed();
-        boolean selected = buttonModel.isSelected();
-        if (selected) {
-          panel.setBackground(Color.BLACK);
-          label.setForeground(Color.WHITE);
-        } else {
-          panel.setBackground(Color.WHITE);
-          label.setForeground(Color.BLACK);
-        }
-      }
-    });
+    // Change the panel background color when the toggle button is selected
+    darkMode.addChangeListener(
+        new ChangeListener() {
+          @Override
+          public void stateChanged(ChangeEvent e) {
+            AbstractButton abstractButton = (AbstractButton) e.getSource();
+            ButtonModel buttonModel = abstractButton.getModel();
+            boolean armed = buttonModel.isArmed();
+            boolean pressed = buttonModel.isPressed();
+            boolean selected = buttonModel.isSelected();
+            if (selected) {
+              panel.setBackground(Color.BLACK);
+              label.setForeground(Color.WHITE);
+            } else {
+              panel.setBackground(Color.WHITE);
+              label.setForeground(Color.BLACK);
+            }
+          }
+        });
 
     // create a new JTable
     JTable table = new JTable(100, 4);
@@ -370,7 +369,5 @@ public class cd_shelf_gui {
             }
           }
         });
-
-    
   }
 }
