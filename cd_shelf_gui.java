@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.io.Console;
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.AbstractButton;
@@ -8,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JToggleButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.JPasswordField;
 
 public class cd_shelf_gui {
   // the cd_shelf has a gui that allows the user to add, remove, search and print
@@ -47,22 +45,23 @@ public class cd_shelf_gui {
     darkMode.setSelected(false);
 
     // Change the panel background color when the toggle button is selected
-    darkMode.addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        AbstractButton abstractButton = (AbstractButton) e.getSource();
-        ButtonModel buttonModel = abstractButton.getModel();
+    darkMode.addChangeListener(
+        new ChangeListener() {
+          @Override
+          public void stateChanged(ChangeEvent e) {
+            AbstractButton abstractButton = (AbstractButton) e.getSource();
+            ButtonModel buttonModel = abstractButton.getModel();
 
-        boolean selected = buttonModel.isSelected();
-        if (selected) {
-          panel.setBackground(Color.BLACK);
-          label.setForeground(Color.WHITE);
-        } else {
-          panel.setBackground(Color.WHITE);
-          label.setForeground(Color.BLACK);
-        }
-      }
-    });
+            boolean selected = buttonModel.isSelected();
+            if (selected) {
+              panel.setBackground(Color.BLACK);
+              label.setForeground(Color.WHITE);
+            } else {
+              panel.setBackground(Color.WHITE);
+              label.setForeground(Color.BLACK);
+            }
+          }
+        });
 
     // create a new JTable
     JTable table = new JTable(100, 5);
@@ -136,26 +135,22 @@ public class cd_shelf_gui {
     // make the frame half the size of the screen
     frame.setLocationRelativeTo(null);
 
-    
-
-    
-    
-
-
     // make the frame visible
     frame.setVisible(true);
 
-
-
-
-
-
-    //ask if the user returns or is new
-    String[] options = new String[] { "New", "Returning" };
-    int response = JOptionPane.showOptionDialog(null, "Are you new or returning?", "New or Returning",
-        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
-        null, options, options[0]);
-    //if the user is new, ask for their name and create a new account
+    // ask if the user returns or is new
+    String[] options = new String[] {"New", "Returning"};
+    int response =
+        JOptionPane.showOptionDialog(
+            null,
+            "Are you new or returning?",
+            "New or Returning",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            options,
+            options[0]);
+    // if the user is new, ask for their name and create a new account
     if (response == 0) {
       String name = JOptionPane.showInputDialog("What is your name?");
       String password = JOptionPane.showInputDialog("What is your password?");
@@ -165,38 +160,33 @@ public class cd_shelf_gui {
         JOptionPane.showMessageDialog(null, "Account created");
       } else {
         JOptionPane.showMessageDialog(null, "Passwords do not match");
-
-
       }
     }
-    //if the user is returning, ask for their name and password
+    // if the user is returning, ask for their name and password
     if (response == 1) {
       String name = JOptionPane.showInputDialog("What is your name?");
       String password = JOptionPane.showInputDialog("What is your password?");
-      //if the name and password match, allow the user to access the shelf
+      // if the name and password match, allow the user to access the shelf
       if (shelf.login(name, password)) {
         JOptionPane.showMessageDialog(null, "Welcome back " + name);
       } else {
         JOptionPane.showMessageDialog(null, "Incorrect name or password");
-        //when the message is closed, the program will exit
+        // when the message is closed, the program will exit
         System.exit(0);
       }
     }
 
-
-
-    //if one of the above messages is closed, close the program
+    // if one of the above messages is closed, close the program
     if (response == -1) {
       System.exit(0);
     }
 
     // on every click of the table, it refreshes the table
 
-
     table.addMouseListener(
         new java.awt.event.MouseAdapter() {
 
-  @Override
+          @Override
           public void mouseClicked(java.awt.event.MouseEvent evt) {
             for (int i = 0; i < shelf.getNumcds(); i++) {
               table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
@@ -215,10 +205,14 @@ public class cd_shelf_gui {
             // create a new cd
             String title = JOptionPane.showInputDialog("Enter the title of the cd");
             String artist = JOptionPane.showInputDialog("Enter the artist of the cd");
-            int tracks = Integer.parseInt(
-                JOptionPane.showInputDialog("Enter the number of tracks on the cd"));
-            double price = Double.parseDouble(JOptionPane.showInputDialog("Enter the price of the cd"));
-            int year = Integer.parseInt(JOptionPane.showInputDialog("Enter the year of publication of the cd"));
+            int tracks =
+                Integer.parseInt(
+                    JOptionPane.showInputDialog("Enter the number of tracks on the cd"));
+            double price =
+                Double.parseDouble(JOptionPane.showInputDialog("Enter the price of the cd"));
+            int year =
+                Integer.parseInt(
+                    JOptionPane.showInputDialog("Enter the year of publication of the cd"));
 
             cd c = new cd(title, artist, tracks, price, year);
             // add the cd to the shelf
@@ -239,8 +233,9 @@ public class cd_shelf_gui {
         new java.awt.event.ActionListener() {
           public void actionPerformed(java.awt.event.ActionEvent evt) {
             // remove the cd from the shelf
-            int i = Integer.parseInt(
-                JOptionPane.showInputDialog("Enter the index of the cd you want to remove"));
+            int i =
+                Integer.parseInt(
+                    JOptionPane.showInputDialog("Enter the index of the cd you want to remove"));
             shelf.remove(i);
             // update the table
             table.setValueAt("", 0, 0);
@@ -387,7 +382,6 @@ public class cd_shelf_gui {
               table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
               table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
               table.setValueAt(shelf.getCds()[i].getYear(), i, 4);
-
             }
           }
         });
@@ -408,6 +402,5 @@ public class cd_shelf_gui {
             }
           }
         });
-
   }
 }

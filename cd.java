@@ -8,7 +8,7 @@ public class cd {
   private int tracks;
   // the price of the cd
   private double price;
-  //the year the cd was released
+  // the year the cd was released
   private int pYear;
   // the constructor of the cd class
   public cd(String t, String a, int tr, double p, int e) {
@@ -19,10 +19,10 @@ public class cd {
     pYear = e;
   }
 
-
   public int getYear() {
     return pYear;
   }
+
   public void setYear(int e) {
     pYear = e;
   }
@@ -75,7 +75,7 @@ public class cd {
 
   @Override
   public boolean equals(Object obj) {
-    
+
     return super.equals(obj);
   }
 
