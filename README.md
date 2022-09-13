@@ -33,7 +33,7 @@ cd cdShelf
 
 - use the latest release [latest release](www.github.com/SpotlightForBugs/cdShelf/releases/latest)
 
-- download both jar files
+- download the jar file
 - run the cdShelf_gui.jar file
 
 # Code Quality Metrics
