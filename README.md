@@ -31,7 +31,7 @@ cd cdShelf
 
 ## Installation from binary
 
-- use the latest release [latest release](www.github.com/SpotlightForBugs/cdShelf/releases/)
+- use the [latest release](https://github.com/SpotlightForBugs/cdShelf/releases/latest)
 
 - download the jar file
 - run the cdShelf_gui.jar file
