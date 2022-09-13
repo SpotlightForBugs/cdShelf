@@ -17,18 +17,6 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/SpotlightForBugs/cdshelf?)
 
 
-
-
-
-
-
-
-
-
-[![DeepSource](https://deepsource.io/gh/SpotlightForBugs/cdShelf.svg/?label=active+issues&show_trend=true&token=TmjgsVPYZ8WVKONETE23T6t-)](https://deepsource.io/gh/SpotlightForBugs/cdShelf/?ref=repository-badge)
-[![DeepSource](https://deepsource.io/gh/SpotlightForBugs/cdShelf.svg/?label=resolved+issues&show_trend=true&token=TmjgsVPYZ8WVKONETE23T6t-)](https://deepsource.io/gh/SpotlightForBugs/cdShelf/?ref=repository-badge)
-
-
 This is a simple program that allows you to keep track of your CD collection. 
 It is written in Python and uses the swing library for the GUI.
  It is currently in development and is not yet ready for use.
@@ -47,6 +35,22 @@ cd cdShelf
 # download the .zip file
 # extract the .zip file
 # run the .jar file
+
+
+
+
+
+
+# Code Quality Metrics
+
+We use deepsource to check our code quality 
+
+[![DeepSource](https://static.deepsource.io/deepsource-badge-light-mini.svg)](https://deepsource.io/gh/SpotlightForBugs/cdshelf/?ref=repository-badge)
+
+These issues are not fixed yet, but we are working on it:
+[![DeepSource](https://deepsource.io/gh/SpotlightForBugs/cdShelf.svg/?label=active+issues&show_trend=true&token=TmjgsVPYZ8WVKONETE23T6t-)](https://deepsource.io/gh/SpotlightForBugs/cdShelf/?ref=repository-badge)
+These issues are resolved:
+[![DeepSource](https://deepsource.io/gh/SpotlightForBugs/cdShelf.svg/?label=resolved+issues&show_trend=true&token=TmjgsVPYZ8WVKONETE23T6t-)](https://deepsource.io/gh/SpotlightForBugs/cdShelf/?ref=repository-badge)
 
 
 
