@@ -53,11 +53,15 @@ cd cdShelf
 
 We use deepsource to check our code quality 
 
-[![DeepSource](https://static.deepsource.io/deepsource-badge-light-mini.svg)](https://deepsource.io/gh/SpotlightForBugs/cdshelf/?ref=repository-badge)
+[![DeepSource](https://static.deepsource.io/deepsource-badge-dark.svg)](https://deepsource.io/gh/SpotlightForBugs/cdshelf/?ref=repository-badge)
 
 These issues are not fixed yet, but we are working on it:
+
 [![DeepSource](https://deepsource.io/gh/SpotlightForBugs/cdShelf.svg/?label=active+issues&show_trend=true&token=TmjgsVPYZ8WVKONETE23T6t-)](https://deepsource.io/gh/SpotlightForBugs/cdShelf/?ref=repository-badge)
-These issues are resolved:
+
+---
+These issues were resolved:
+
 [![DeepSource](https://deepsource.io/gh/SpotlightForBugs/cdShelf.svg/?label=resolved+issues&show_trend=true&token=TmjgsVPYZ8WVKONETE23T6t-)](https://deepsource.io/gh/SpotlightForBugs/cdShelf/?ref=repository-badge)
 
 
