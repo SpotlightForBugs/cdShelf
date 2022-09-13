@@ -43,10 +43,10 @@ cd cdShelf
 
 ## Installation from binary
 
-# use the latest release from github.com/SpotlightForBugs/cdShelf/releases
-# download the .zip file
-# extract the .zip file
-# run the .jar file
+- use the latest release from github.com/SpotlightForBugs/cdShelf/releases
+- download the .zip file
+- extract the .zip file
+- run the .jar file
 
 
 
