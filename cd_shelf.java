@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+
+
 
 // the cd shelf is a list of cds that can be added to and removed from.
 public class cd_shelf {
@@ -39,10 +42,14 @@ public class cd_shelf {
    * @return The removed object
    */
   // the method to remove a cd from the shelf
-  public void remove(int i) {
+  public cd remove(int i) {
+    cd c = cds[i];
     cds[i] = cds[numcds - 1];
+    cds[numcds - 1] = null;
     numcds--;
+    return c;
   }
+ 
 
   /**
    * The swap function swaps the values of two elements in an array.
@@ -183,6 +190,14 @@ public class cd_shelf {
       bw.newLine();
     }
     bw.close();
+
+
+   
+
+
+    
+   
+    
   }
 
   /**
@@ -230,37 +245,66 @@ public class cd_shelf {
     return cds;
   }
 
-  public void removeDuplicates() {
+ 
+
+
+
+/**
+ * The removeDuplicatesFromArray function removes duplicate entries from the array of CD objects.
+ * 
+ *
+ *
+ * @return The number of unique cds in the array
+ *
+ */
+  public void removeDuplicatesFromArray() {
     for (int i = 0; i < numcds; i++) {
       for (int j = i + 1; j < numcds; j++) {
-        if (cds[i].getTitle().equals(cds[j].getTitle())) {
+        if (cds[i].equals(cds[j])) {
           remove(j);
-          j--;
         }
       }
     }
 
-    // if a line in the file is a duplicate, it will be removed from the file
-    try {
-      File file = new File("cds.txt");
-      FileWriter fw = new FileWriter(file.getAbsoluteFile());
-      BufferedWriter bw = new BufferedWriter(fw);
-      for (int i = 0; i < numcds; i++) {
-        bw.write(
-            cds[i].getTitle()
-                + ","
-                + cds[i].getArtist()
-                + ","
-                + cds[i].getTracks()
-                + ","
-                + cds[i].getPrice());
-        bw.newLine();
-      }
-      bw.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
+
+
+ 
+ /**
+  * The removeDuplicatesFromFile function reads in the cds.txt file and removes any duplicate entries from the file.
+  * 
+  *
+  *
+  *
+  */
+  public void removeDuplicatesFromFile() throws IOException {
+    BufferedReader br = new BufferedReader(new java.io.FileReader("cds.txt"));
+    String line = br.readLine();
+    cds = new cd[100];
+    numcds = 0;
+    HashMap<String, String> map = new HashMap<String, String>();
+
+    while (line != null) {
+      String[] parts = line.split(",");
+      String key = parts[0] + parts[1] + parts[2] + parts[3] + parts[4];
+      if (map.containsKey(key)) {
+        line = br.readLine();
+        continue;
+      } else {
+        map.put(key, line);
+      }
+      line = br.readLine();
+    }
+    br.close();
+    map.clear();
+  }
+
+  
+  public void removeDuplicates() throws IOException {
+    removeDuplicatesFromFile();
+    removeDuplicatesFromArray();
+  }
+
 
   /**
    * The quickSortTitle function sorts the list of CDs by title.

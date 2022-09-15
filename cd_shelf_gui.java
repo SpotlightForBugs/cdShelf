@@ -184,10 +184,11 @@ public class cd_shelf_gui {
       }
     }
 
-    // if one of the above messages is closed, close the program
-    if (response == -1) {
+    // if one of the above messages is closed or nothing is entered, the program will exit
+    if (response == -1 || response == JOptionPane.CLOSED_OPTION) {
       System.exit(0);
     }
+  
 
     // on every click of the table, it refreshes the table
 
@@ -255,7 +256,7 @@ public class cd_shelf_gui {
             cd c = new cd(title, artist, tracks, price, year);
             // add the cd to the shelf
             shelf.add(c);
-            // update the table and write all the cds to the table
+            // update the table and write all the cds to the table, only replace duplicates
             for (int i = 0; i < shelf.getNumcds(); i++) {
               table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
               table.setValueAt(shelf.getCds()[i].getArtist(), i, 1);
@@ -263,6 +264,7 @@ public class cd_shelf_gui {
               table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
               table.setValueAt(shelf.getCds()[i].getYear(), i, 4);
             }
+        
           }
         });
 
@@ -276,11 +278,13 @@ public class cd_shelf_gui {
                     JOptionPane.showInputDialog("Enter the index of the cd you want to remove"));
             shelf.remove(i);
             // update the table
-            table.setValueAt("", 0, 0);
-            table.setValueAt("", 0, 1);
-            table.setValueAt("", 0, 2);
-            table.setValueAt("", 0, 3);
-            table.setValueAt("", 0, 4);
+            for (int z = 0; z < shelf.getNumcds(); z++) {
+              table.setValueAt(shelf.getCds()[z].getTitle(), z, 0);
+              table.setValueAt(shelf.getCds()[z].getArtist(), z, 1);
+              table.setValueAt(shelf.getCds()[z].getTracks(), z, 2);
+              table.setValueAt(shelf.getCds()[z].getPrice(), z, 3);
+              table.setValueAt(shelf.getCds()[z].getYear(), z, 4);
+            }
           }
         });
 
@@ -363,7 +367,11 @@ public class cd_shelf_gui {
         new java.awt.event.ActionListener() {
           public void actionPerformed(java.awt.event.ActionEvent evt) {
             // remove duplicates
-            shelf.removeDuplicates();
+            try {
+              shelf.removeDuplicates();
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
             // refresh the table
             for (int i = 0; i < shelf.getNumcds(); i++) {
               table.setValueAt(shelf.getCds()[i].getTitle(), i, 0);
@@ -437,6 +445,47 @@ public class cd_shelf_gui {
               table.setValueAt(shelf.getCds()[i].getTracks(), i, 2);
               table.setValueAt(shelf.getCds()[i].getPrice(), i, 3);
               table.setValueAt(shelf.getCds()[i].getYear(), i, 4);
+            }
+          }
+        });
+
+    //add entries which are inside the table but not in the shelf to the shelf
+    addFromTable.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            
+
+            System.out.println("addFromTable");
+            //print the new entries with all the information about name, artist, tracks, price and year
+            for (int i = 0; i < table.getRowCount(); i++) {
+              if (table.getValueAt(i, 0) != null && table.getValueAt(i, 1) != null && table.getValueAt(i, 2) != null && table.getValueAt(i, 3) != null && table.getValueAt(i, 4) != null) {
+                System.out.println(
+                    table.getValueAt(i, 0)
+                        + " "
+                        + table.getValueAt(i, 1)
+                        + " "
+                        + table.getValueAt(i, 2)
+                        + " "
+                        + table.getValueAt(i, 3)
+                        + " "
+                        + table.getValueAt(i, 4)
+                        + " "
+                       
+                        );
+                        
+                //add the new entries to the shelf
+                shelf.addcd(
+                    
+                        (String) table.getValueAt(i, 0),
+                        (String) table.getValueAt(i, 1),
+                        (int) Integer.valueOf(table.getValueAt(i, 2).toString()),
+                        (double) Double.parseDouble(table.getValueAt(i, 3).toString()),
+                        (int) Integer.valueOf(table.getValueAt(i, 4).toString())
+                        
+                        );
+                        
+              }
+
             }
           }
         });
