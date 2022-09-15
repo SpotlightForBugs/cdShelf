@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-
-
 // the cd shelf is a list of cds that can be added to and removed from.
 public class cd_shelf {
   // the array of cds
@@ -49,7 +47,6 @@ public class cd_shelf {
     numcds--;
     return c;
   }
- 
 
   /**
    * The swap function swaps the values of two elements in an array.
@@ -190,14 +187,6 @@ public class cd_shelf {
       bw.newLine();
     }
     bw.close();
-
-
-   
-
-
-    
-   
-    
   }
 
   /**
@@ -245,18 +234,11 @@ public class cd_shelf {
     return cds;
   }
 
- 
-
-
-
-/**
- * The removeDuplicatesFromArray function removes duplicate entries from the array of CD objects.
- * 
- *
- *
- * @return The number of unique cds in the array
- *
- */
+  /**
+   * The removeDuplicatesFromArray function removes duplicate entries from the array of CD objects.
+   *
+   * @return The number of unique cds in the array
+   */
   public void removeDuplicatesFromArray() {
     for (int i = 0; i < numcds; i++) {
       for (int j = i + 1; j < numcds; j++) {
@@ -265,18 +247,12 @@ public class cd_shelf {
         }
       }
     }
-
   }
 
-
- 
- /**
-  * The removeDuplicatesFromFile function reads in the cds.txt file and removes any duplicate entries from the file.
-  * 
-  *
-  *
-  *
-  */
+  /**
+   * The removeDuplicatesFromFile function reads in the cds.txt file and removes any duplicate
+   * entries from the file.
+   */
   public void removeDuplicatesFromFile() throws IOException {
     BufferedReader br = new BufferedReader(new java.io.FileReader("cds.txt"));
     String line = br.readLine();
@@ -299,12 +275,10 @@ public class cd_shelf {
     map.clear();
   }
 
-  
   public void removeDuplicates() throws IOException {
     removeDuplicatesFromFile();
     removeDuplicatesFromArray();
   }
-
 
   /**
    * The quickSortTitle function sorts the list of CDs by title.
